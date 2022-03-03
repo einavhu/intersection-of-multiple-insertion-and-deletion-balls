@@ -81,4 +81,37 @@ void CommonSequences::createURight() {
 }
 
 
+void generateStrings_tweight(int t, vector<bool> curr, int i, int weight, vector<vector<bool>>& strings)
+    {
+    if (i == 2*t + 1){
+        return;
+    }
+
+    if (weight < t){
+
+    // First assign "0" at ith position
+    // and try for all other permutations
+    // for remaining positions
+        curr[i] = false;
+        generateStrings_tweight(t, curr, i + 1, weight, strings);
+
+    // And then assign "1" at ith position
+    // and try for all other permutations
+    // for remaining positions
+
+        curr[i] = true;
+        weight++;
+        generateStrings_tweight(t, curr, i + 1, weight, strings);
+    }
+
+    else{
+        strings.push_back(curr);
+        //cout << strings.size() << endl;
+        return;
+    }
+}
+
+
+
+
 

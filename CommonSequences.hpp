@@ -27,5 +27,7 @@ public:
     void createURight(); //call algorithm 2
 };
 
+void generateStrings_tweight(int t, vector<bool> curr, int i, int weight, vector<vector<bool>>& strings);
+
 
 #endif //INTERSECTION_OF_MULTIPLE_INSERTION_AND_DELETION_BALLS_COMMONSEQUENCES_H
