@@ -37,5 +37,14 @@ int main() {
         cout << endl;
     }
 
+
+    // how to call generateStrings_tweight
+    int t=0;
+    vector<vector<bool>> strings;
+    vector<bool> curr(2*t, 0);
+    generateStrings_tweight(t, curr, 0, 0, strings);
+
+
+
     return 0;
 }
