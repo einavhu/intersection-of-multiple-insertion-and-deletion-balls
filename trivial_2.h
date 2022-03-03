@@ -1,0 +1,8 @@
+//
+// Created by User on 03/03/2022.
+//
+
+#ifndef INTERSECTION_TRIVIAL_2_H
+#define INTERSECTION_TRIVIAL_2_H
+
+#endif //INTERSECTION_TRIVIAL_2_H
