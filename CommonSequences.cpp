@@ -16,7 +16,7 @@ CommonSequences::CommonSequences(string supersequence, string subsequence)
     this->lcs = vector<vector<int>>();
     this->match = vector<vector<bool>>();
     this->uRight = vector<vector<bool>>();
-    this->sequence_set = vector<string>();
+    this->sequence_set = set<string>();
 
 }
 
@@ -137,16 +137,28 @@ void CommonSequences::generateStrings_tweight(int t, vector<bool> curr, int i, i
 }
 
 
-
+std::string CommonSequences::vector_to_string(vector<bool> indices){
+    string str;
+    for(int i=0;i<indices.size();i++){
+        if(indices[i]==true){
+            str+=supersequence[i];
+        }
+    }
+    return str;
+}
 
 void CommonSequences::createIntersect()
 {
-    int n = supersequence.length()-((supersequence.length()-subsequence.length())/2);
+    int t = (supersequence.length()-subsequence.length())/2;
     createURight();
-    std::set<string> S;
-//    for(auto U=uRight.begin();U!=uRight.end(); U++){
-//        for(int i)
-//    }
+    vector<vector<bool>> strings;
+    vector<bool> curr(2*t, false);
+    generateStrings_tweight(t, curr, 0, 0, strings);
+    for(auto U=uRight.begin(); U != uRight.end(); U++){
+        for(auto small=strings.begin();small!=strings.end();small++){
+            sequence_set.insert(vector_to_string(get_option( *U, *small)));
+        }
+    }
 }
 
 

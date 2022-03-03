@@ -8,6 +8,7 @@
 #include <string>
 #include <iostream>
 #include <vector>
+#include <set>
 
 using namespace std;
 
@@ -18,7 +19,7 @@ public:
     vector<vector<int>> lcs; // dynamic programming table of computing the lcs of subsequence and supersequence
     vector<vector<bool>> match; // match table as defined in paper of subsequence and supersequence
     vector<vector<bool>> uRight; // the U_rigth set as defined in paper - built using algorithm 2 in paper
-    vector<string> sequence_set; // the result set of algorithm 1 in paper
+    set<string> sequence_set; // the result set of algorithm 1 in paper
 
     CommonSequences(string supersequence, string subsequence);
     void lcsTable();
@@ -27,6 +28,7 @@ public:
     void createURight(); // algorithm 2
     void createIntersect(); // algorithm 1
     void generateStrings_tweight(int t, vector<bool> curr, int i, int weight, vector<vector<bool>>& strings);
+    std::string vector_to_string(vector<bool> indices);
 };
 
 #endif //INTERSECTION_OF_MULTIPLE_INSERTION_AND_DELETION_BALLS_COMMONSEQUENCES_H
