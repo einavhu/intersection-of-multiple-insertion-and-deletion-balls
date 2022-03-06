@@ -20,14 +20,14 @@ int num_runs(string s){
     return counter;
 }
 
-string max_runs(set<string>& strings, int* n_p){
+set<string>::iterator max_runs(set<string>& strings, int* n_p){
     int current_max = 0;
-    string max_str = "";
     int n = 0;
+    auto max_str = strings.begin();
     for (auto s_p = strings.begin(); s_p != strings.end(); s_p++){
         n = num_runs(*s_p);
         if (n > current_max){
-            max_str = *s_p;
+            max_str = s_p;
             current_max = n;
         }
     }
@@ -37,14 +37,14 @@ string max_runs(set<string>& strings, int* n_p){
     return max_str;
 }
 
-string min_runs(set<string>& strings, int* n_p){
+set<string>::iterator min_runs(set<string>& strings, int* n_p){
     int current_min = (strings.begin())->length()+1;
-    string min_str = "";
     int n = 0;
+    auto min_str = strings.begin();
     for (auto s_p = strings.begin(); s_p != strings.end(); s_p++){
         n = num_runs(*s_p);
         if (n < current_min){
-            min_str = *s_p;
+            min_str = s_p;
             current_min = n;
         }
     }
@@ -54,13 +54,36 @@ string min_runs(set<string>& strings, int* n_p){
     return min_str;
 }
 
-set<string> best_intersection(set<string>& supers, set<string>& subs){
+vector<set<string>::iterator> best_strings(set<string>& supers, set<string>& subs){
     int min, max;
-    int* min_p = &min;
     int* max_p = &max;
-    string sub = max_runs(subs, max_p);
-    string sup = min_runs(supers, min_p);
-    CommonSequences cs = CommonSequences(sup, sub);
-    cs.createIntersect();
-    return cs.sequence_set;
+    int* min_p = &min;
+
+    auto it1 = min_runs(supers, min_p);
+    auto it2 = max_runs(subs, max_p);
+    vector<set<string>::iterator> best = {it1, it2};
+    return best;
+}
+
+vector<set<string>::iterator> string_pair(bool best, set<string>& supers, set<string>& subs){
+    if (best){
+        return best_strings(supers, subs);
+    }
+    else{
+        srand((unsigned int)time(NULL));
+        int idx1 = rand() % supers.size();
+        int idx2 = rand() % subs.size();
+        auto it1 = supers.begin();
+        for (int i = 0; i < idx1; i++)
+        {
+            it1++;
+        }
+        auto it2 = subs.begin();
+        for (int i = 0; i < idx2; i++)
+        {
+            it2++;
+        }
+        vector<set<string>::iterator> pair = {it1, it2};
+        return pair;
+    }
 }
