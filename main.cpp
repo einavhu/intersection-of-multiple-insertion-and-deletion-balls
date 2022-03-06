@@ -4,6 +4,7 @@
 #include "CommonSequences.hpp"
 #include <iostream>
 #include "trivial_2.h"
+#include "trivial_1.h"
 
 using namespace std;
 
@@ -26,7 +27,7 @@ int main() {
     vector<string> sub = vector<string>();
     sub.push_back("0010");
     sub.push_back("0011");
-    set<string> res = algorithm2(cs.sequence_set, super, sub);
+    set<string> res = algorithm1(super, sub);
     cout << "result" << endl;
     for (auto i = res.begin(); i!= res.end(); i++){
         cout << *i << endl;
