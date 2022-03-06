@@ -35,7 +35,7 @@ int main(int argc, char *argv[]) {
     int option = atoi(argv[0]);
     set<string> res;
     if(option == 1){ // algorithm 1
-        res = algorithm_1(supersequences,subsequences);
+        res = algorithm_1(k,supersequences,subsequences);
     }
     else if(option == 21){ // algorithm 2, version 1
         res = algorithm_2(OPTION_1,supersequences,subsequences);
@@ -44,7 +44,8 @@ int main(int argc, char *argv[]) {
         res = algorithm_2(OPTION_2,supersequences,subsequences);
     }
     else if(option == 3){ // algorithm 3
-        res = algorithm_3(supersequences,subsequences);
+        int t = atoi(argv[argc-1]);
+        res = algorithm_3(t,supersequences,subsequences);
     }
     else{
         cout << "invalid input to main" << endl;
