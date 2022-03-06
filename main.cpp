@@ -6,59 +6,64 @@
 #include "trivial_2.h"
 #include "trivial_1.h"
 
+#define OPTION_1 1
+#define OPTION_2 2
+
 using namespace std;
 
 void print(){
 
 }
 
+// algorithm 1: input: k supersequences, k subsequences. The algorithm pairs each supersequence to a subsequence and
+// creates
+// their common sequence intersection set. The algorithm returns the intersection of the k common sets.
+// algorithm 2: input: k supersequences, k subsequences. chooses a supersequence and a subsequence and creates their
+// common intersection set. The algorithm
+// returns all strings in the set that are a supersequence of all subsequences and a subsequence of all
+// supersequences.
+//version 1 - chooses a random pair
+//version 2 - choose the supersequence with the least number of runs and the subsequence with the highest number of
+// runs.
+// algorithm 3: input: k supersequences, k subsequences and a number 1<=t<=k. Run algorithm 1 on the first t pairs
+// of strings. Use the output for algorithm 2 for the remaining sequences. Returns the output of algorithm 2.
+// argv: value,k ,supersequences followed by subsequences, t (use only for algorithm 3)
+// value: 1-algorithm1, 21-algorithm 2 with version 1, 22-algorithm 2 with version 2, 3-algorithm3,
 
-int main() {
-    CommonSequences cs = CommonSequences("00111010", "0010");
-    cs.createIntersect();
-    cout << "first group" << endl;
-    for(auto i=cs.sequence_set.begin();i!=cs.sequence_set.end();i++){
-        cout<< *i <<endl;
+int main(int argc, char *argv[]) {
+    // get input
+    vector<string> supersequences, subsequences;
+    int k = atoi(argv[1]);
+    for(int i=0; i<k ;i++){
+        supersequences.insert(subsequences.end(),argv[2+i]);
+    }
+    for(int i=0; i<k ;i++){
+        subsequences.insert(subsequences.end(),argv[2+k+i]);
     }
 
-    vector<string> super = vector<string>();
-    super.push_back("00111010");
-    super.push_back("00111011");
-    vector<string> sub = vector<string>();
-    sub.push_back("0010");
-    sub.push_back("0011");
-    set<string> res = algorithm1(super, sub);
-    cout << "result" << endl;
+    int option = atoi(argv[0]);
+    set<string> res;
+    if(option == 1){ // algorithm 1
+        res = algorithm_1(supersequences,subsequences);
+    }
+    else if(option == 21){ // algorithm 2, version 1
+        res = algorithm_2(OPTION_1,supersequences,subsequences);
+    }
+    else if(option == 22){ // algorithm 2, version 2
+        res = algorithm_2(OPTION_2,supersequences,subsequences);
+    }
+    else if(option == 3){ // algorithm 3
+        res = algorithm_3(supersequences,subsequences);
+    }
+    else{
+        cout << "invalid input to main" << endl;
+        return 0;
+    }
+
+    cout << "result:" << endl;
     for (auto i = res.begin(); i!= res.end(); i++){
         cout << *i << endl;
     }
-    //print lcs table
-//    for(int i=0; i<=(int)cs.subsequence.length(); i++){
-//        for(int j = 0; j<=(int)cs.supersequence.length(); j++){
-//            cout << cs.lcs[i][j] << ",";
-//        }
-//        cout << endl;
-//    }
-//    cout << endl << endl;
-//
-//    //print match table
-//    for(int i=0; i<=cs.subsequence.length(); i++){
-//        for(int j = 0; j<=cs.supersequence.length(); j++){
-//            cout << cs.match[i][j] << ",";
-//        }
-//        cout << endl;
-//    }
-//    cout << endl << endl;
-//
-//    for(auto i = cs.uRight.begin(); i != cs.uRight.end(); ++i){
-//        for(int j=0; j<cs.supersequence.length(); j++){
-//            if ((*i)[j]){
-//                cout << j << ",";
-//            }
-//        }
-//        cout << endl;
-//    }
-
 
     return 0;
 }
