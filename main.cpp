@@ -1,19 +1,11 @@
-//
-// Created by Ben on 02/03/2022.
-//
-#include "CommonSequences.hpp"
 #include <iostream>
-#include "trivial_2.h"
-#include "trivial_1.h"
+#include "CommonSequences.h"
+#include "Algorithms.h"
 
 #define OPTION_1 1
 #define OPTION_2 2
 
 using namespace std;
-
-void print(){
-
-}
 
 // algorithm 1: input: k supersequences, k subsequences. The algorithm pairs each supersequence to a subsequence and
 // creates
