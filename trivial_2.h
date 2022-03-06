@@ -11,7 +11,7 @@
 
 using namespace std;
 
-set<string> algorithm2(vector<string> supersequences, vector<string> subsequences);
+set<string> algorithm2(set<string> common, vector<string> supersequences, vector<string> subsequences);
 
 
 #endif //INTERSECTION_TRIVIAL_2_H
