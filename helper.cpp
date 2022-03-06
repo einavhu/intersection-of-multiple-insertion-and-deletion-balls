@@ -1,9 +1,5 @@
-//
-// Created by User on 06/03/2022.
-//
-
-#include "helper.h"
-#include "CommonSequences.hpp"
+#include "Helper.h"
+#include "CommonSequences.h"
 
 
 
@@ -37,7 +33,7 @@ vector<string>::iterator max_runs(vector<string>& strings, int* n_p){
     return max_str;
 }
 
-vectpr<string>::iterator min_runs(vector<string>& strings, int* n_p){
+vector<string>::iterator min_runs(vector<string>& strings, int* n_p){
     int current_min = (strings.begin())->length()+1;
     int n = 0;
     auto min_str = strings.begin();

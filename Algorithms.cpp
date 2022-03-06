@@ -1,8 +1,4 @@
-//
-// Created by Ben on 06/03/2022.
-//
-
-#include "helper.h"
+#include "Helper.h"
 #include "CommonSequences.h"
 #include <map>
 #include <set>
