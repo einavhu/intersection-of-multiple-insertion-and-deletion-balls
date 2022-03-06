@@ -11,9 +11,8 @@ using namespace std;
 // creates
 // their common sequence intersection set. The algorithm returns the intersection of the k common sets.
 // algorithm 2: input: k supersequences, k subsequences. chooses a supersequence and a subsequence and creates their
-// common intersection set. The algorithm
-// returns all strings in the set that are a supersequence of all subsequences and a subsequence of all
-// supersequences.
+// common intersection set. The algorithm returns all strings in the set that are a supersequence of all
+// subsequences and a subsequence of all supersequences.
 //version 1 - chooses a random pair
 //version 2 - choose the supersequence with the least number of runs and the subsequence with the highest number of
 // runs.
