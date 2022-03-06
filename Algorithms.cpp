@@ -4,9 +4,13 @@
 
 #include "helper.h"
 #include "CommonSequences.h"
+#include <map>
+#include <set>
+
+using namespace std;
 
 //move to utils
-vector<set<string>> create_intersection_groups(int k, vector<string> supersequence, vector<string> subsequence){
+vector<set<string>> create_intersection_groups(int k, vector<string>& supersequence, vector<string>& subsequence){
     vector<set<string>> S;
     for(int i=0; i<k;i++){
         CommonSequences cs = CommonSequences(supersequence[i],subsequence[i]);
@@ -17,7 +21,7 @@ vector<set<string>> create_intersection_groups(int k, vector<string> supersequen
 }
 
 
-set<string> algorithm_1(int k, vector<string> supersequence, vector<string> subsequence) {
+set<string> algorithm_1(int k, vector<string>& supersequence, vector<string>& subsequence) {
     vector<set<string>> intersection_groups = create_intersection_groups(k, supersequence, subsequence);
     map<string, int> strings_counter;
     set<string> return_set;
@@ -52,7 +56,7 @@ bool is_subsequence(string sub, string super){
 }
 
 //rename
-set<string> algorithm_2_helper(set<string> common, vector<string> supersequences, vector<string> subsequences){
+set<string> algorithm_2_helper(set<string> common, vector<string>& supersequences, vector<string>& subsequences){
     set<string> result = set<string>();
     for (auto i=common.begin(); i!= common.end(); ++i){
         bool flag = true;
@@ -78,23 +82,23 @@ set<string> algorithm_2_helper(set<string> common, vector<string> supersequences
     return result;
 }
 
-set<string> algorithm_2(int version, vector<string> supersequences, vector<string> subsequences){
-    vector<set::iterator> intersection_strings;
+set<string> algorithm_2(int version, vector<string>& supersequences, vector<string>& subsequences){
+    vector<vector<string>::iterator> intersection_strings;
     if (version == 1){
-        //set<string> common_set = ??;
+        intersection_strings = string_pair(false, supersequences, subsequences);
     }
     else if (version == 2){
-        intersection_strings = best_intersection(supersequences, subsequences);
+        intersection_strings = string_pair(true, supersequences, subsequences);
     }
     CommonSequences cs = CommonSequences(*intersection_strings[0],*intersection_strings[1]);
     supersequences.erase(intersection_strings[0]);
     subsequences.erase(intersection_strings[1]);
-    algorithm2_helper(cs.sequence_set, supersequences, subsequences);
+    algorithm_2_helper(cs.sequence_set, supersequences, subsequences);
 }
 
-set<string> algorithm_3(int t, vector<string> supersequences, vector<string> subsequences){
+set<string> algorithm_3(int t, vector<string>& supersequences, vector<string>& subsequences){
     set<string> common = algorithm_1(t, supersequences, subsequences);
-    supersequences_cut = vector<string>(supersequences.begin() + t, supersequences.end());
-    subsequences_cut = vector<string>(subsequences.begin() + t, subsequences.end());
+    vector<string> supersequences_cut = vector<string>(supersequences.begin() + t, supersequences.end());
+    vector<string> subsequences_cut = vector<string>(subsequences.begin() + t, subsequences.end());
     return algorithm_2_helper(common, supersequences_cut, subsequences_cut);
 }
