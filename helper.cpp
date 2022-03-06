@@ -20,7 +20,7 @@ int num_runs(string s){
     return counter;
 }
 
-set<string>::iterator max_runs(set<string>& strings, int* n_p){
+vector<string>::iterator max_runs(vector<string>& strings, int* n_p){
     int current_max = 0;
     int n = 0;
     auto max_str = strings.begin();
@@ -37,7 +37,7 @@ set<string>::iterator max_runs(set<string>& strings, int* n_p){
     return max_str;
 }
 
-set<string>::iterator min_runs(set<string>& strings, int* n_p){
+vectpr<string>::iterator min_runs(vector<string>& strings, int* n_p){
     int current_min = (strings.begin())->length()+1;
     int n = 0;
     auto min_str = strings.begin();
@@ -54,18 +54,18 @@ set<string>::iterator min_runs(set<string>& strings, int* n_p){
     return min_str;
 }
 
-vector<set<string>::iterator> best_strings(set<string>& supers, set<string>& subs){
+vector<vector<string>::iterator> best_strings(vector<string>& supers, vector<string>& subs){
     int min, max;
     int* max_p = &max;
     int* min_p = &min;
 
     auto it1 = min_runs(supers, min_p);
     auto it2 = max_runs(subs, max_p);
-    vector<set<string>::iterator> best = {it1, it2};
+    vector<vector<string>::iterator> best = {it1, it2};
     return best;
 }
 
-vector<set<string>::iterator> string_pair(bool best, set<string>& supers, set<string>& subs){
+vector<vector<string>::iterator> string_pair(bool best, vector<string>& supers, vector<string>& subs){
     if (best){
         return best_strings(supers, subs);
     }
@@ -83,7 +83,7 @@ vector<set<string>::iterator> string_pair(bool best, set<string>& supers, set<st
         {
             it2++;
         }
-        vector<set<string>::iterator> pair = {it1, it2};
+        vector<vector<string>::iterator> pair = {it1, it2};
         return pair;
     }
 }
