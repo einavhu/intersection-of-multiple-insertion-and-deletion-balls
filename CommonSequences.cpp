@@ -2,7 +2,7 @@
 // Created by Ben on 01/03/2022.
 //
 
-#include "CommonSequences.hpp"
+#include "CommonSequences.h"
 #include <iostream>
 #include <vector>
 #include <set>
