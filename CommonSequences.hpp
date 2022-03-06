@@ -24,10 +24,9 @@ public:
     void lcsTable();
     void matchTable();
     void uRightHelper(int i, int j, vector<bool> curr); //algorithm 2
-    void createURight(); //call algorithm 2
+    void createURight(); // algorithm 2
+    void createIntersect(); // algorithm 1
+    void generateStrings_tweight(int t, vector<bool> curr, int i, int weight, vector<vector<bool>>& strings);
 };
-
-void generateStrings_tweight(int t, vector<bool> curr, int i, int weight, vector<vector<bool>>& strings);
-
 
 #endif //INTERSECTION_OF_MULTIPLE_INSERTION_AND_DELETION_BALLS_COMMONSEQUENCES_H

@@ -5,6 +5,7 @@
 #include "CommonSequences.hpp"
 #include <iostream>
 #include <vector>
+#include <set>
 
 using namespace std;
 
@@ -80,24 +81,48 @@ void CommonSequences::createURight() {
     uRightHelper(subsequence.length(), supersequence.length(),curr);
 }
 
+//return vector U with n 1's
+vector<bool> get_option(vector<bool> U, vector<bool> small){ // U length=n+t and has n-t 1's, small length = 2t and
+    // has t 1's
+    vector<bool> union_U(U.size(),false);
+    int i=0;
+    int U_it=0;
+    int small_it = 0;
+    while(i!=U.size()){
+        while(U[U_it] == true && U_it!=U.size()){
+            union_U[i]=true;
+            U_it++;
+            i++;
+        }
+        if(U_it == U.size()){
+            return union_U;
+        }
+        union_U[i]=small[small_it];
+        i++;
+        small_it++;
+        U_it++;
+    }
+    return union_U;
+}
 
-void generateStrings_tweight(int t, vector<bool> curr, int i, int weight, vector<vector<bool>>& strings)
-    {
+
+void CommonSequences::generateStrings_tweight(int t, vector<bool> curr, int i, int weight, vector<vector<bool>>& strings)
+{
     if (i == 2*t + 1){
         return;
     }
 
     if (weight < t){
 
-    // First assign "0" at ith position
-    // and try for all other permutations
-    // for remaining positions
+        // First assign "0" at ith position
+        // and try for all other permutations
+        // for remaining positions
         curr[i] = false;
         generateStrings_tweight(t, curr, i + 1, weight, strings);
 
-    // And then assign "1" at ith position
-    // and try for all other permutations
-    // for remaining positions
+        // And then assign "1" at ith position
+        // and try for all other permutations
+        // for remaining positions
 
         curr[i] = true;
         weight++;
@@ -110,6 +135,20 @@ void generateStrings_tweight(int t, vector<bool> curr, int i, int weight, vector
         return;
     }
 }
+
+
+
+
+void CommonSequences::createIntersect()
+{
+    int n = supersequence.length()-((supersequence.length()-subsequence.length())/2);
+    createURight();
+    std::set<string> S;
+//    for(auto U=uRight.begin();U!=uRight.end(); U++){
+//        for(int i)
+//    }
+}
+
 
 
 
