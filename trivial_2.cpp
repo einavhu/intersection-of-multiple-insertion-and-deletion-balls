@@ -16,11 +16,9 @@ bool is_subsequence(string sub, string super){
     return i == sub.length();
 }
 
-set<string> algorithm2(vector<string> supersequences, vector<string> subsequences){
+set<string> algorithm2(set<string> common, vector<string> supersequences, vector<string> subsequences){
     set<string> result = set<string>();
-    CommonSequences cs = CommonSequences(supersequences[0], subsequences[0]);
-    cs.createIntersect();
-    for (auto i=cs.sequence_set.begin(); i!= cs.sequence_set.end(); ++i){
+    for (auto i=common.begin(); i!= common.end(); ++i){
         bool flag = true;
         for(auto j=supersequences.begin(); j!=supersequences.end(); ++j){
             if (!is_subsequence(*i, *j)){
@@ -31,7 +29,7 @@ set<string> algorithm2(vector<string> supersequences, vector<string> subsequence
         if (!flag){
             continue;
         }
-        for(auto j=subsequences.begin(); j!=supersequences.end(); ++j){
+        for(auto j=subsequences.begin(); j!=subsequences.end(); ++j){
             if (!is_subsequence(*j, *i)){
                 flag = false;
                 break;
