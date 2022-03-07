@@ -62,10 +62,10 @@ vector<vector<string>::iterator> best_strings(vector<string>& supers, vector<str
 }
 
 vector<vector<string>::iterator> string_pair(bool best, vector<string>& supers, vector<string>& subs){
-    if (best){
+    if (best){ // version 2
         return best_strings(supers, subs);
     }
-    else{
+    else{ // version 1
         srand((unsigned int)time(NULL));
         int idx1 = rand() % supers.size();
         int idx2 = rand() % subs.size();
