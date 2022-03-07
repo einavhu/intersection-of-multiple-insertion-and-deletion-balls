@@ -24,7 +24,7 @@ void CommonSequences::lcsTable() {
     int m = subsequence.length();
     int n = supersequence.length();
     for (int i = 0; i <= m; i++){
-        this->lcs.push_back(vector<int>(n, 0));
+        this->lcs.push_back(vector<int>(n+1, 0));
         if (i != 0){
             for (int j = 0; j <= n; j++) {
                 if (j == 0)
@@ -42,7 +42,7 @@ void CommonSequences::matchTable() {
     int m = subsequence.length()+1;
     int n = supersequence.length()+1;
     for (int i = 0; i <= m; i++) {
-        this->match.push_back(vector<bool>(n, false));
+        this->match.push_back(vector<bool>(n+1, false));
         if (i != 0) {
             for (int j = 0; j <= n; j++) {
                 if (j == 0)
@@ -88,13 +88,13 @@ vector<bool> get_option(vector<bool> U, vector<bool> small){ // U length=n+t and
     int i=0;
     int U_it=0;
     int small_it = 0;
-    while(i!=U.size()){
-        while(U[U_it] == true && U_it!=U.size()){
+    while(i!=(int)U.size()){
+        while(U[U_it] == true && U_it!=(int)U.size()){
             union_U[i]=true;
             U_it++;
             i++;
         }
-        if(U_it == U.size()){
+        if((int)U_it == (int)U.size()){
             return union_U;
         }
         union_U[i]=small[small_it];
@@ -139,7 +139,7 @@ void CommonSequences::generateStrings_tweight(int t, vector<bool> curr, int i, i
 
 std::string CommonSequences::vector_to_string(vector<bool> indices){
     string str;
-    for(int i=0;i<indices.size();i++){
+    for(int i=0;i<(int)indices.size();i++){
         if(indices[i]==true){
             str+=supersequence[i];
         }
