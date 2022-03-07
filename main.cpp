@@ -38,7 +38,7 @@ int main(int argc, char *argv[]) {
     ifstream input;
     input.open(argv[3]);
     if (!input.is_open()) {
-        cout << "Failed opening input file!" << endl;
+        cerr << "Failed opening input file!" << endl;
         return 0;
     }
     vector<double> test_times;
@@ -94,15 +94,12 @@ int main(int argc, char *argv[]) {
             cout << "invalid input to main" << endl;
             return 0;
         }
-//        cout << "result:" << endl;
-//        for (auto i = res.begin(); i!= res.end(); i++){
-//            cout << *i << endl;
-//        }
     }
 
     double avg_time = total_time/num_of_tests;
-    cout << "ALGORITHM: " << option << endl;
-    cout << "TEST NAME: " << argv[3] << endl;
-    cout << "AVERAGE TIME PER TEST: " << avg_time << endl;
+    cout << argv[3] << "," << avg_time << endl;
+    ofstream alg("../algorithm_times1.csv", ios::app);
+    alg << option << "," << argv[3] << "," << avg_time << endl;
+    alg.close();
     return 0;
 }
