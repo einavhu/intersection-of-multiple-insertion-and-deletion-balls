@@ -52,7 +52,7 @@ bool is_subsequence(string sub, string super){
 }
 
 //rename
-set<string> algorithm_2_helper(set<string> common, vector<string>& supersequences, vector<string>& subsequences){
+set<string> algorithm_2_helper(set<string>& common, vector<string>& supersequences, vector<string>& subsequences){
     set<string> result = set<string>();
     for (auto i=common.begin(); i!= common.end(); ++i){
         bool flag = true;
@@ -86,14 +86,19 @@ set<string> algorithm_2(int version, vector<string>& supersequences, vector<stri
     else if (version == 2){
         intersection_strings = string_pair(true, supersequences, subsequences);
     }
-    CommonSequences cs = CommonSequences(*intersection_strings[0],*intersection_strings[1]);
+    CommonSequences cs = CommonSequences(*(intersection_strings[0]),*(intersection_strings[1]));
+    cs.createIntersect();
     supersequences.erase(intersection_strings[0]);
     subsequences.erase(intersection_strings[1]);
-    algorithm_2_helper(cs.sequence_set, supersequences, subsequences);
+    return algorithm_2_helper(cs.sequence_set, supersequences, subsequences);
 }
 
 set<string> algorithm_3(int t, vector<string>& supersequences, vector<string>& subsequences){
+    //TODO assert t!=0
     set<string> common = algorithm_1(t, supersequences, subsequences);
+    if (t == supersequences.size()){
+        return common;
+    }
     vector<string> supersequences_cut = vector<string>(supersequences.begin() + t, supersequences.end());
     vector<string> subsequences_cut = vector<string>(subsequences.begin() + t, subsequences.end());
     return algorithm_2_helper(common, supersequences_cut, subsequences_cut);

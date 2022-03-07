@@ -24,15 +24,15 @@ using namespace std;
 int main(int argc, char *argv[]) {
     // get input
     vector<string> supersequences, subsequences;
-    int k = atoi(argv[1]);
+    int k = atoi(argv[2]);
     for(int i=0; i<k ;i++){
-        supersequences.insert(subsequences.end(),argv[2+i]);
+        supersequences.push_back(argv[3+i]);
     }
     for(int i=0; i<k ;i++){
-        subsequences.insert(subsequences.end(),argv[2+k+i]);
+        subsequences.push_back(argv[3+k+i]);
     }
 
-    int option = atoi(argv[0]);
+    int option = atoi(argv[1]);
     set<string> res;
     if(option == 1){ // algorithm 1
         res = algorithm_1(k,supersequences,subsequences);
