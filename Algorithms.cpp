@@ -2,6 +2,8 @@
 #include "CommonSequences.h"
 #include <map>
 #include <set>
+#include <algorithm>
+
 
 using namespace std;
 
@@ -22,11 +24,10 @@ set<string> algorithm_1(int k, vector<string>& supersequence, vector<string>& su
     map<string, int> strings_counter;
     set<string> return_set;
     for (int group = 0; group < k; group++) {
-        for (auto str = intersection_groups[group].begin();
-             str != intersection_groups[group].end(); str++) {
+        for (auto str = intersection_groups[group].begin();str != intersection_groups[group].end(); str++) {
             auto iter = strings_counter.find(*str);
             if (iter == strings_counter.end()) {
-                strings_counter.insert({*str, 1});
+                iter = strings_counter.insert({*str, 1}).first;
 
             } else { // str already in map
                 (*iter).second++;
@@ -93,13 +94,29 @@ set<string> algorithm_2(int version, vector<string>& supersequences, vector<stri
     return algorithm_2_helper(cs.sequence_set, supersequences, subsequences);
 }
 
-set<string> algorithm_3(int t, vector<string>& supersequences, vector<string>& subsequences){
-    //TODO assert t!=0
-    set<string> common = algorithm_1(t, supersequences, subsequences);
-    if (t == supersequences.size()){
+struct less_func
+{
+    inline bool operator() (const string& str1, const string& str2)
+    {
+        return (num_runs(str1) < num_runs(str2));
+    }
+};
+
+
+set<string> algorithm_3(int m, vector<string>& supersequences, vector<string>& subsequences){
+    if(m<1){
+        cout << "invalid input to algorithm 3" << endl;
+        set<string> not_good = {};
+        return not_good;
+    }
+    std::sort(subsequences.begin(),subsequences.end(),less_func());
+    std::sort(supersequences.begin(),supersequences.end(),less_func());
+    std::reverse(subsequences.begin(), subsequences.end());
+    set<string> common = algorithm_1(m, supersequences, subsequences);
+    if (m == supersequences.size()){
         return common;
     }
-    vector<string> supersequences_cut = vector<string>(supersequences.begin() + t, supersequences.end());
-    vector<string> subsequences_cut = vector<string>(subsequences.begin() + t, subsequences.end());
+    vector<string> supersequences_cut = vector<string>(supersequences.begin() + m, supersequences.end());
+    vector<string> subsequences_cut = vector<string>(subsequences.begin() + m, subsequences.end());
     return algorithm_2_helper(common, supersequences_cut, subsequences_cut);
 }
