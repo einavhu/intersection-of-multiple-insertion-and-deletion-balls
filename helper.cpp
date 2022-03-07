@@ -69,16 +69,8 @@ vector<vector<string>::iterator> string_pair(bool best, vector<string>& supers, 
         srand((unsigned int)time(NULL));
         int idx1 = rand() % supers.size();
         int idx2 = rand() % subs.size();
-        auto it1 = supers.begin();
-        for (int i = 0; i < idx1; i++)
-        {
-            it1++;
-        }
-        auto it2 = subs.begin();
-        for (int i = 0; i < idx2; i++)
-        {
-            it2++;
-        }
+        auto it1 = supers.begin()+idx1;
+        auto it2 = subs.begin()+idx2;
         vector<vector<string>::iterator> pair = {it1, it2};
         return pair;
     }
