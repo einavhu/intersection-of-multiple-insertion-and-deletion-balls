@@ -65,7 +65,7 @@ def main():
     n = 30
     ks = [20];
     ts = [1, 2, 3, 4, 5]
-    run_tests(100, n, ks, ts, "n30k20")
+    run_tests(100, n, ks, ts, "n30k20b")
 
 if __name__ == "__main__":
     main()
