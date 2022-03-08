@@ -137,11 +137,11 @@ set<string> algorithm_3(vector<string>& supersequences, vector<string>& subseque
     //std::reverse(subsequences.begin(), subsequences.end());
     set<string> intersection = {};
     int m = 1;
-    pair<int,int> next = choose_pair(supersequences,subsequences); // TODO: remove from list
-    CommonSequences cs0 = CommonSequences(supersequences[next.first],subsequences[next.second]);
+    vector<vector<string>::iterator> next = string_pair(true,supersequences,subsequences);
+    CommonSequences cs0 = CommonSequences(*next[0],*next[1]);
     cs0.createIntersect();
-    supersequences.erase(supersequences.begin()+next.first);
-    subsequences.erase(subsequences.begin()+next.second);
+    supersequences.erase(next[0]);
+    subsequences.erase(next[1]);
     map<string,int> counter;
     for(const auto & i : cs0.sequence_set){
         counter.insert({i,1});
@@ -149,12 +149,12 @@ set<string> algorithm_3(vector<string>& supersequences, vector<string>& subseque
     }
 
     while(((intersection.size()*2*(supersequences.size()-m)) >= supersequences.size()) && !supersequences.empty()){
-        next = choose_pair(supersequences,subsequences);
-        CommonSequences cs = CommonSequences(supersequences[next.first],subsequences[next.second]);
+        next = string_pair(true,supersequences,subsequences);
+        CommonSequences cs = CommonSequences(*next[0],*next[1]);
         cs.createIntersect();
         intersection = merge_intersection(intersection, cs,counter, m);
-        supersequences.erase(supersequences.begin()+next.first);
-        subsequences.erase(subsequences.begin()+next.second);
+        supersequences.erase(next[0]);
+        subsequences.erase(next[1]);
         m++;
     }
 
