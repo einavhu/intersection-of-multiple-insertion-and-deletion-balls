@@ -1,4 +1,4 @@
-#include "Helper.h"
+#include "helper.h"
 #include "CommonSequences.h"
 #include <map>
 #include <set>
@@ -112,6 +112,9 @@ set<string> algorithm_3(int m, vector<string>& supersequences, vector<string>& s
     std::sort(subsequences.begin(),subsequences.end(),less_func());
     std::sort(supersequences.begin(),supersequences.end(),less_func());
     std::reverse(subsequences.begin(), subsequences.end());
+    while(){
+        
+    }
     set<string> common = algorithm_1(m, supersequences, subsequences);
     if (m == supersequences.size()){
         return common;
