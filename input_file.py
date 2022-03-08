@@ -70,10 +70,10 @@ def run_tests(num_tests_per_file, n, k_list, t_list, input_file_name):
 
 # call from command line with arguments string_length, num_super/sub_strings, num_insertions/deletions
 def main():
-    n = 25
-    ks = [10];
+    n = 30
+    ks = [20];
     ts = [1, 2, 3, 4, 5]
-    run_tests(100, n, ks, ts, "best_test")
+    run_tests(100, n, ks, ts, "n30k20")
 
 if __name__ == "__main__":
     main()
