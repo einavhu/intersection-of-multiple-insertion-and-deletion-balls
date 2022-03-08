@@ -59,21 +59,25 @@ def test_batch(num_tests_in_each, n_for_each, k_for_each, t_for_each):
         create_test(num_tests_in_each[i], n_for_each[i], k_for_each[i], t_for_each[i], "test" + str(counter) + "." + name_extension + ".txt")
         counter = counter + 1
 
-def run_tests(num_tests_per_file, n, k_list, t_list, input_file_name):
-    for k in k_list:
-        f = open(input_file_name, "w")
-        f.write(str(num_tests_per_file*len(k_list)*len(t_list))+"\n")
-        for t in t_list:
-            #input_file_name = "tests/"+"k" + str(k) + "t" + str(t) + ".txt"
-            create_test(num_tests_per_file, n, k, t, f)
-        f.close();
+def run_tests(num_tests_per_file, n_list, k_list, t_list, input_file_name):
+    f = open(input_file_name, "w")
+    f.write(str(num_tests_per_file)+"\n")
+    f.write(" ".join([str(n) for n in n_list])+"\n")
+    f.write(" ".join([str(k) for k in k_list])+"\n")
+    f.write(" ".join([str(t) for t in t_list])+"\n")
+    for n in n_list:
+        for k in k_list:
+            for t in t_list:
+                #input_file_name = "tests/"+"k" + str(k) + "t" + str(t) + ".txt"
+                create_test(num_tests_per_file, n, k, t, f)
+    f.close();
 
 # call from command line with arguments string_length, num_super/sub_strings, num_insertions/deletions
 def main():
-    n = 25
-    ks = [10];
-    ts = [1, 2, 3, 4, 5]
-    run_tests(100, n, ks, ts, "best_test")
+    n = [50,75,100,125,150]
+    ks = [2,6,10,20]
+    ts = [1, 2, 3, 4, 5, 6]
+    run_tests(500, n, ks, ts, "best_test.txt")
 
 if __name__ == "__main__":
     main()
