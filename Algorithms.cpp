@@ -112,9 +112,6 @@ set<string> algorithm_3(int m, vector<string>& supersequences, vector<string>& s
     std::sort(subsequences.begin(),subsequences.end(),less_func());
     std::sort(supersequences.begin(),supersequences.end(),less_func());
     std::reverse(subsequences.begin(), subsequences.end());
-    while(){
-        
-    }
     set<string> common = algorithm_1(m, supersequences, subsequences);
     if (m == supersequences.size()){
         return common;
@@ -122,4 +119,20 @@ set<string> algorithm_3(int m, vector<string>& supersequences, vector<string>& s
     vector<string> supersequences_cut = vector<string>(supersequences.begin() + m, supersequences.end());
     vector<string> subsequences_cut = vector<string>(subsequences.begin() + m, subsequences.end());
     return algorithm_2_helper(common, supersequences_cut, subsequences_cut);
+}
+
+pair<pair<int,int>,int> best_size(vector<string>& super, vector<string>& sub){
+    int min_size = 0;
+    pair<pair<int,int>,int> result;
+    for(int i=0; i<super.size(); i++){
+        for(int j=0; j<sub.size(); j++){
+            CommonSequences cs = CommonSequences(super[i], sub[j]);
+            cs.createIntersect();
+            if ((i == 0 && j == 0) || cs.sequence_set.size() < min_size){
+                result = {{i,j},cs.sequence_set.size()};
+                min_size = cs.sequence_set.size();
+            }
+        }
+    }
+    return result;
 }
