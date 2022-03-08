@@ -60,13 +60,13 @@ int main(int argc, char *argv[]) {
         alg = ofstream(OUTPUT_FILE_NAME1);
     }
     else if (option == 21){
-        alg = ofstream(OUTPUT_FILE_NAME1);
+        alg = ofstream(OUTPUT_FILE_NAME21);
     }
     else if (option == 22){
-        alg = ofstream(OUTPUT_FILE_NAME1);
+        alg = ofstream(OUTPUT_FILE_NAME22);
     }
     else if (option == 3){
-        alg= ofstream(OUTPUT_FILE_NAME1);
+        alg= ofstream(OUTPUT_FILE_NAME3);
     }
     else {
         cerr << "Wrong algorithm!" << endl;
