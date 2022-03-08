@@ -85,7 +85,7 @@ int main(int argc, char *argv[]) {
         else if(option == 3){ // algorithm 3
             int t = atoi(argv[argc-1]);
             clock_t begin_time = clock();
-            res = algorithm_3(t,supersequences,subsequences);
+            res = algorithm_3(supersequences,subsequences);
             clock_t end_time = clock();
             total_time += (double)(end_time-begin_time)/CLOCKS_PER_SEC;
             test_times.push_back((double)(end_time-begin_time)/CLOCKS_PER_SEC);

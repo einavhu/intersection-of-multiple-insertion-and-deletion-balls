@@ -17,6 +17,6 @@ using namespace std;
 
 set<string> algorithm_1(int k, vector<string>& supersequence, vector<string>& subsequence);
 set<string> algorithm_2(int version, vector<string>& supersequences, vector<string>& subsequences);
-set<string> algorithm_3(int m, vector<string>& supersequences, vector<string>& subsequences);
+set<string> algorithm_3(vector<string>& supersequences, vector<string>& subsequences);
 
 #endif //INTERSECTION_ALGORITHMS_H
