@@ -38,9 +38,7 @@ def generate_k(super, k, num_extra, s):
 # n: length of strings in intersect
 # k: number of superstrings and substrings
 # t: number of insertions/ deletions
-def create_test(num_tests, n, k, t, file_name):
-    f = open(file_name, "w")
-    f.write(str(num_tests)+"\n")
+def create_test(num_tests, n, k, t, f):
     for i in range (0, num_tests):
         s = generate_random_string(n)
         supers = generate_k(1, k, t, s)
@@ -52,7 +50,7 @@ def create_test(num_tests, n, k, t, file_name):
             f.write(sub)
             f.write(" ")
         f.write("\n")
-    f.close()
+
 
 def test_batch(num_tests_in_each, n_for_each, k_for_each, t_for_each):
     counter = 0
@@ -61,18 +59,21 @@ def test_batch(num_tests_in_each, n_for_each, k_for_each, t_for_each):
         create_test(num_tests_in_each[i], n_for_each[i], k_for_each[i], t_for_each[i], "test" + str(counter) + "." + name_extension + ".txt")
         counter = counter + 1
 
-def run_tests(num_tests_per_file, n, k_list, t_list):
+def run_tests(num_tests_per_file, n, k_list, t_list, input_file_name):
     for k in k_list:
+        f = open(input_file_name, "w")
+        f.write(str(num_tests_per_file*len(k_list)*len(t_list))+"\n")
         for t in t_list:
-            input_file_name = "tests/"+"k" + str(k) + "t" + str(t) + ".txt"
-            create_test(num_tests_per_file, n, k, t, input_file_name)
+            #input_file_name = "tests/"+"k" + str(k) + "t" + str(t) + ".txt"
+            create_test(num_tests_per_file, n, k, t, f)
+        f.close();
 
 # call from command line with arguments string_length, num_super/sub_strings, num_insertions/deletions
 def main():
-    n = 100
-    ks = range(1,11)
-    ts = [2,6,10,14,18,22]
-    run_tests(100,n,ks,ts)
+    n = 25
+    ks = [10];
+    ts = [1, 2, 3, 4, 5]
+    run_tests(100, n, ks, ts, "best_test")
 
 if __name__ == "__main__":
     main()
