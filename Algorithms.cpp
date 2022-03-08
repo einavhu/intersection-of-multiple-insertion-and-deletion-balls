@@ -163,3 +163,19 @@ set<string> algorithm_3(vector<string>& supersequences, vector<string>& subseque
     }
     return algorithm_2_helper(intersection, supersequences, subsequences);
 }
+
+pair<pair<int,int>,int> best_size(vector<string>& super, vector<string>& sub){
+    int min_size = 0;
+    pair<pair<int,int>,int> result;
+    for(int i=0; i<super.size(); i++){
+        for(int j=0; j<sub.size(); j++){
+            CommonSequences cs = CommonSequences(super[i], sub[j]);
+            cs.createIntersect();
+            if ((i == 0 && j == 0) || cs.sequence_set.size() < min_size){
+                result = {{i,j},cs.sequence_set.size()};
+                min_size = cs.sequence_set.size();
+            }
+        }
+    }
+    return result;
+}
