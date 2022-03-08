@@ -110,15 +110,16 @@ struct less_func
     }
 };
 
+// TODO
 pair<int,int> choose_pair(vector<string>& supersequences, vector<string>& subsequences){
     pair<int,int> ret_value;
-
+    ret_value={0,0};
     return ret_value;
 }
 
 set<string> merge_intersection(set<string> &intersection,  CommonSequences &cs,map<string,int>&counter, int m){
     set<string> ret_set;
-    for(auto str=intersection.begin();str!=intersection.end();str++){
+    for(auto str=cs.sequence_set.begin();str!=cs.sequence_set.end();str++){
         auto iter = counter.find(*str);
         if (iter != counter.end()) {
             (*iter).second++;
@@ -144,8 +145,10 @@ set<string> algorithm_3(vector<string>& supersequences, vector<string>& subseque
     map<string,int> counter;
     for(const auto & i : cs0.sequence_set){
         counter.insert({i,1});
+        intersection.insert(i);
     }
-    while((intersection.size()*2*(supersequences.size()-m)) >= supersequences.size()){
+
+    while(((intersection.size()*2*(supersequences.size()-m)) >= supersequences.size()) && !supersequences.empty()){
         next = choose_pair(supersequences,subsequences);
         CommonSequences cs = CommonSequences(supersequences[next.first],subsequences[next.second]);
         cs.createIntersect();
