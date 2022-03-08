@@ -117,7 +117,7 @@ pair<int,int> choose_pair(vector<string>& supersequences, vector<string>& subseq
     return ret_value;
 }
 
-set<string> merge_intersection(set<string> &intersection,  CommonSequences &cs,map<string,int>&counter, int m){
+set<string> merge_intersection(set<string> &intersection,  CommonSequences &cs,map<string,int> &counter, int m){
     set<string> ret_set;
     for(auto str=cs.sequence_set.begin();str!=cs.sequence_set.end();str++){
         auto iter = counter.find(*str);
