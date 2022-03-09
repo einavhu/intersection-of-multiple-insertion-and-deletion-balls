@@ -51,14 +51,6 @@ def create_test(num_tests, n, k, t, f):
             f.write(" ")
         f.write("\n")
 
-
-def test_batch(num_tests_in_each, n_for_each, k_for_each, t_for_each):
-    counter = 0
-    for i in range (0, len(num_tests_in_each)):
-        name_extension = "k = " + str(k_for_each[i]) + ", t = " + str(t_for_each[i])
-        create_test(num_tests_in_each[i], n_for_each[i], k_for_each[i], t_for_each[i], "test" + str(counter) + "." + name_extension + ".txt")
-        counter = counter + 1
-
 def run_tests(num_tests_per_file, n, k_list, t_list, input_file_name):
     for k in k_list:
         f = open(input_file_name, "w")
@@ -70,10 +62,10 @@ def run_tests(num_tests_per_file, n, k_list, t_list, input_file_name):
 
 # call from command line with arguments string_length, num_super/sub_strings, num_insertions/deletions
 def main():
-    n = 25
-    ks = [10];
+    n = 30
+    ks = [20];
     ts = [1, 2, 3, 4, 5]
-    run_tests(100, n, ks, ts, "best_test")
+    run_tests(100, n, ks, ts, "n30k20b")
 
 if __name__ == "__main__":
     main()
