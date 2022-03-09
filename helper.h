@@ -14,9 +14,9 @@ using namespace std;
 int num_runs(string s);
 vector<string>::iterator max_runs(vector<string>& strings, int* n_p);
 vector<string>::iterator min_runs(vector<string>& strings, int* n_p);
-//int max_alternating_sequence(string s);
-//vector<vector<string>::iterator> min_maxAlternatingDiff_strings(vector<string>& supers,
- //                                                               vector<string>& subs);
+int max_alternating_sequence(string s);
+vector<vector<string>::iterator> min_maxAlternatingDiff_strings(vector<string>& supers,
+                                                                vector<string>& subs);
 vector<vector<string>::iterator> max_maxAlternatingDiff_strings(vector<string>& supers,
                                                                 vector<string>& subs);
 vector<vector<string>::iterator> best_strings(vector<string>& supers, vector<string>& subs);
