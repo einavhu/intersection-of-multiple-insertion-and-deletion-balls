@@ -114,7 +114,7 @@ int main(int argc, char *argv[]) {
                         clock_t begin_time = clock();
                         res = algorithm_2(OPTION_1,supersequences,subsequences);
                         clock_t end_time = clock();
-                        total_time += (double)((end_time-begin_time)/CLOCKS_PER_SEC);
+                        total_time += (double)(end_time-begin_time)/CLOCKS_PER_SEC;
                         test_times.push_back((double)(end_time-begin_time)/CLOCKS_PER_SEC);
                     }
                     else if(option == 22){ // algorithm 2, version 2
