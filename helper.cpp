@@ -168,3 +168,54 @@ vector<vector<string>::iterator> string_pair(bool best, vector<string>& supers, 
         return {it1, it2};
     }
 }
+
+vector<int> get_runs_vector(string str){
+    vector<int> ret_vector;
+    int ret_index=0, str_index = 0,counter = 0;
+    char current = str[str_index];
+    while(str_index != str.length()){
+        while((str[str_index] == current) && (str_index!= str.length())){
+            counter++;
+            str_index++;
+        }
+        ret_vector.push_back(counter);
+        current = str[str_index];
+        counter = 0;
+        ret_index++;
+    }
+    return ret_vector;
+}
+
+pair<vector<int>,vector<int>> complete_vectors(vector<int> super_vector, vector<int> sub_vector, ){
+
+}
+
+int get_diff_norm(vector<int> super_vector, vector<int> sub_vector){
+
+}
+
+
+
+vector<vector<string>::iterator> version_23(vector<string>& supersequences, vector<string>& subsequences){
+    int k = supersequences.size();
+    vector<vector<int>> vec_super,vec_sub;
+    for(int i=0;i<k;i++){
+        vec_super.push_back(get_runs_vector(supersequences[k]));
+        vec_sub.push_back(get_runs_vector(subsequences[k]));
+    }
+    pair<int,int> min_pair;
+    int min,current; // TODO: initialize
+    pair<vector<int>,vector<int>> complete_sup_sub;
+    for(int i_sup = 0;i_sup<supersequences.size();i_sup++){
+        for(int j_sub = 0;j_sub<subsequences.size();j_sub++){
+            complete_sup_sub = complete_vectors(vec_super[i_sup],vec_sub[j_sub]);
+            current = get_diff_norm(complete_sup_sub.first,complete_sup_sub.second);
+            if(current < min){
+                min = current;
+                min_pair = {i_sup,j_sub};
+            }
+        }
+    }
+    return min_pair; // TODO: ben fix
+}
+

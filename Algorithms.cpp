@@ -95,6 +95,9 @@ set<string> algorithm_2(int version, vector<string>& supersequences, vector<stri
     else if (version == 2){
         intersection_strings = string_pair(true, supersequences, subsequences);
     }
+    else if (version == 3){
+        intersection_strings = version_23(supersequences,subsequences);
+    }
     CommonSequences cs = CommonSequences(*(intersection_strings[0]),*(intersection_strings[1]));
     cs.createIntersect();
     supersequences.erase(intersection_strings[0]);
@@ -109,13 +112,6 @@ struct less_func
         return (num_runs(str1) < num_runs(str2));
     }
 };
-
-// TODO
-pair<int,int> choose_pair(vector<string>& supersequences, vector<string>& subsequences){
-    pair<int,int> ret_value;
-    ret_value={0,0};
-    return ret_value;
-}
 
 set<string> merge_intersection(set<string> &intersection,  CommonSequences &cs,map<string,int> &counter, int m){
     set<string> ret_set;
@@ -179,3 +175,5 @@ pair<pair<int,int>,int> best_size(vector<string>& super, vector<string>& sub){
     }
     return result;
 }
+
+

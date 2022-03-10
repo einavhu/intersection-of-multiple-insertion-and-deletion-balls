@@ -21,4 +21,5 @@ vector<vector<string>::iterator> max_maxAlternatingDiff_strings(vector<string>& 
                                                                 vector<string>& subs);
 vector<vector<string>::iterator> best_strings(vector<string>& supers, vector<string>& subs);
 vector<vector<string>::iterator> string_pair(bool best, vector<string>& supers, vector<string>& subs);
+vector<vector<string>::iterator> version_23(vector<string>& supersequences, vector<string>& subsequences);
 #endif //INTERSECTION_HELPER_H
