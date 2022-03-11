@@ -3,6 +3,49 @@
 #include "CommonSequences.h"
 
 
+pair<pair<int,int>,int> find_pair_with_min_intersection_size(vector<string>& super, vector<string>& sub){
+    int min_size = 0;
+    pair<pair<int,int>,int> result;
+    for(int i=0; i<super.size(); i++){
+        for(int j=0; j<sub.size(); j++){
+            CommonSequences cs = CommonSequences(super[i], sub[j]);
+            cs.create_ID();
+            if ((i == 0 && j == 0) || cs.sequence_set.size() < min_size){
+                result = {{i,j},cs.sequence_set.size()};
+                min_size = cs.sequence_set.size();
+            }
+        }
+    }
+    return result;
+}
+
+bool is_subsequence(string sub, string super){
+    int i=0, j=0;
+    while(i < sub.length() && j < super.length()){
+        if (sub[i] == super[j]){
+            i++;
+        }
+        j++;
+    }
+    return i == sub.length();
+}
+
+
+vector<set<string>> create_ID_groups(int k, vector<string>& supersequence, vector<string>& subsequence){
+    vector<set<string>> S;
+    for(int i=0; i<k;i++){
+        CommonSequences cs = CommonSequences(supersequence[i],subsequence[i]);
+        cs.create_ID();
+        if(cs.sequence_set.empty()){
+            vector<set<string>> empty={};
+            return empty;
+        }
+        S.push_back(cs.sequence_set);
+    }
+    return S;
+}
+
+
 
 
 int num_runs(string s){
@@ -83,6 +126,7 @@ struct less_func
     }
 };
 
+// for every string makes pair of <string, max_alternating_sequence>
 vector<tuple<vector<string>::iterator, int>> expand_vec(vector<string>& strings){
     vector<tuple<vector<string>::iterator, int>> A;
     auto it = strings.begin();
@@ -94,7 +138,8 @@ vector<tuple<vector<string>::iterator, int>> expand_vec(vector<string>& strings)
     return A;
 }
 
-vector<vector<string>::iterator> min_maxAlternatingDiff_strings(vector<string>& supers, vector<string>& subs){
+//find difference minimal for max alternating
+vector<vector<string>::iterator> min_max_alternating_diff_strings(vector<string>& supers, vector<string>& subs){
     vector<tuple<vector<string>::iterator, int>> A = expand_vec(supers);
     vector<tuple<vector<string>::iterator, int>> B = expand_vec(subs);
 
@@ -126,7 +171,7 @@ vector<vector<string>::iterator> min_maxAlternatingDiff_strings(vector<string>& 
     return {get<0>(*a_p), get<0>(*b_p)};
 }
 
-vector<vector<string>::iterator> max_maxAlternatingDiff_strings(vector<string>& supers, vector<string>& subs){
+vector<vector<string>::iterator> max_max_alternating_diff_strings(vector<string>& supers, vector<string>& subs){
     vector<tuple<vector<string>::iterator, int>> A = expand_vec(supers);
     vector<tuple<vector<string>::iterator, int>> B = expand_vec(subs);
 
@@ -145,8 +190,7 @@ vector<vector<string>::iterator> max_maxAlternatingDiff_strings(vector<string>& 
 }
 
 
-
-vector<vector<string>::iterator> best_strings(vector<string>& supers, vector<string>& subs){
+vector<vector<string>::iterator> min_num_of_runs_diff_strings(vector<string>& supers, vector<string>& subs){
     int min, max;
     int* max_p = &max;
     int* min_p = &min;
@@ -156,19 +200,15 @@ vector<vector<string>::iterator> best_strings(vector<string>& supers, vector<str
     return {it1, it2};
 }
 
-vector<vector<string>::iterator> string_pair(bool best, vector<string>& supers, vector<string>& subs){
-    if (best){ // version 2
-        return best_strings(supers, subs);
-    }
-    else{ // version 1
-        srand((unsigned int)time(NULL));
-        int idx1 = rand() % supers.size();
-        int idx2 = rand() % subs.size();
-        auto it1 = supers.begin()+idx1;
-        auto it2 = subs.begin()+idx2;
-        return {it1, it2};
-    }
+vector<vector<string>::iterator> random_pair(vector<string>& supers, vector<string>& subs){
+    srand((unsigned int)time(NULL));
+    int idx1 = rand() % supers.size();
+    int idx2 = rand() % subs.size();
+    auto it1 = supers.begin()+idx1;
+    auto it2 = subs.begin()+idx2;
+    return {it1, it2};
 }
+
 
 vector<int> get_runs_vector(string str){
     vector<int> ret_vector;
@@ -213,7 +253,7 @@ int get_diff_norm(vector<int> super_vector, vector<int> sub_vector){
 
 
 
-vector<vector<string>::iterator> version_23(vector<string>& supersequences, vector<string>& subsequences){
+vector<vector<string>::iterator> min_dist_run_vectors(vector<string>& supersequences, vector<string>& subsequences){
     int k = supersequences.size();
     vector<vector<int>> vec_super,vec_sub;
     for(int i=0;i<k;i++){
@@ -243,5 +283,45 @@ vector<vector<string>::iterator> version_23(vector<string>& supersequences, vect
         }
     }
     return {supersequences.begin()+min_pair.first,subsequences.begin()+min_pair.second};
+}
+
+set<string> calculate_intersection_set_from_common(set<string>& common, vector<string>& supersequences, vector<string>& subsequences){
+    set<string> result = set<string>();
+    for (auto i=common.begin(); i!= common.end(); ++i){
+        bool flag = true;
+        for(auto j=supersequences.begin(); j!=supersequences.end(); ++j){
+            if (!is_subsequence(*i, *j)){
+                flag = false;
+                break;
+            }
+        }
+        if (!flag){
+            continue;
+        }
+        for(auto j=subsequences.begin(); j!=subsequences.end(); ++j){
+            if (!is_subsequence(*j, *i)){
+                flag = false;
+                break;
+            }
+        }
+        if(flag){
+            result.insert(*i);
+        }
+    }
+    return result;
+}
+
+vector<string> split(string& line){
+    istringstream iss(line);
+    return {istream_iterator<string>{iss},istream_iterator<string>{}};
+}
+
+vector<int> split_int(string& line){
+    vector<string> v = split(line);
+    vector<int> res;
+    for (auto s: v){
+        res.push_back(atoi(s.c_str()));
+    }
+    return res;
 }
 

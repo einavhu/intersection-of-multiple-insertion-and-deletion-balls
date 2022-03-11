@@ -3,49 +3,40 @@
 #include "Algorithms.h"
 #include <fstream>
 #include <time.h>
-#include <sstream>
 #include <iterator>
-#include <chrono>
 
 
-#define OPTION_1 1
-#define OPTION_2 2
+#define HEURISTIC_1 1
+#define HEURISTIC_2 2
 #define OUTPUT_FILE_NAME1 "../algorithm1.csv"
 #define OUTPUT_FILE_NAME21 "../algorithm21.csv"
 #define OUTPUT_FILE_NAME22 "../algorithm22.csv"
-#define OUTPUT_FILE_NAME3 "../algorithm3.csv"
 
 using namespace std;
 
-// algorithm 1: input: k supersequences, k subsequences. The algorithm pairs each supersequence to a subsequence and
-// creates
-// their common sequence intersection set. The algorithm returns the intersection of the k common sets.
-// algorithm 2: input: k supersequences, k subsequences. chooses a supersequence and a subsequence and creates their
-// common intersection set. The algorithm returns all strings in the set that are a supersequence of all
-// subsequences and a subsequence of all supersequences.
-//version 1 - chooses a random pair
-//version 2 - choose the supersequence with the least number of runs and the subsequence with the highest number of
-// runs.
-// algorithm 3: input: k supersequences, k subsequences and a number 1<=t<=k. Run algorithm 1 on the first t pairs
-// of strings. Use the output for algorithm 2 for the remaining sequences. Returns the output of algorithm 2.
-// argv: value, k ,input file name for tests, t (use only for algorithm 3)
-// value: 1-algorithm1, 21-algorithm 2 with version 1, 22-algorithm 2 with version 2, 3-algorithm3,
+// Input to main:
+// Algorithm to use in tests, Input test file path
 
-vector<string> split(string& line){
-    istringstream iss(line);
-    return {istream_iterator<string>{iss},
-                          istream_iterator<string>{}};
+//Algorithm options:
+// 1 - run algorithm 1
+// 21 - run algorithm 2 with heuristic of random pair choosing
+// 22 - run algorithm 2 with heuristic of min difference of num of runs in word
 
-}
+// This file read the input file and calculate for average runtime for each set of parameters.
+// Input file structure:
+// first line - num_of_tests, the number of tests per set of parameters
+// second line - list of n values (target string length) separated by spaces listed in the order they appear in the
+// file
+// third line - lis of k values (number of supersequences/subsequences in each test) separated by spaces in the
+// order they appear in the file
+// fourth line - list of t values (number of deletions/insertions made to create the input) separated by spaces in
+// the order they appear in the file
+// from the fifth line onward:
+// a batch of num_of_tests lines per set of parameters (n,k,t) where each line contains k words of length n+t
+// followed by k words of length n-t
 
-vector<int> split_int(string& line){
-    vector<string> v = split(line);
-    vector<int> res;
-    for (auto s: v){
-        res.push_back(atoi(s.c_str()));
-    }
-    return res;
-}
+// Output:
+// A csv file with the average run time on each set of parameters (n,k,t)
 
 int main(int argc, char *argv[]) {
     int option = atoi(argv[1]);
@@ -64,9 +55,6 @@ int main(int argc, char *argv[]) {
     }
     else if (option == 22){
         alg = ofstream(OUTPUT_FILE_NAME22);
-    }
-    else if (option == 3){
-        alg= ofstream(OUTPUT_FILE_NAME3);
     }
     else {
         cerr << "Wrong algorithm!" << endl;
@@ -112,24 +100,17 @@ int main(int argc, char *argv[]) {
                     }
                     else if(option == 21){ // algorithm 2, version 1
                         clock_t begin_time = clock();
-                        res = algorithm_2(OPTION_1,supersequences,subsequences);
+                        res = algorithm_2(&random_pair, supersequences, subsequences);
                         clock_t end_time = clock();
                         total_time += (double)(end_time-begin_time)/CLOCKS_PER_SEC;
                         test_times.push_back((double)(end_time-begin_time)/CLOCKS_PER_SEC);
                     }
                     else if(option == 22){ // algorithm 2, version 2
                         clock_t begin_time = clock();
-                        res = algorithm_2(OPTION_2,supersequences,subsequences);
+                        res = algorithm_2(&min_num_of_runs_diff_strings, supersequences, subsequences);
                         clock_t end_time = clock();
                         total_time += (double)(end_time-begin_time) / CLOCKS_PER_SEC;
                         test_times.push_back((double)(end_time-begin_time) / CLOCKS_PER_SEC);
-                    }
-                    else if(option == 3){ // algorithm 3
-                        clock_t begin_time = clock();
-                        res = algorithm_3(supersequences,subsequences);
-                        clock_t end_time = clock();
-                        total_time += (double)(end_time-begin_time)/CLOCKS_PER_SEC;
-                        test_times.push_back((double)(end_time-begin_time)/CLOCKS_PER_SEC);
                     }
                 }
                 double avg_time = total_time/num_of_tests;
