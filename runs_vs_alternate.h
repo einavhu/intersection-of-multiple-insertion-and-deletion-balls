@@ -12,7 +12,8 @@
 #include <sstream>
 #include "Algorithms.h"
 
-//void alternating_intersection(vector<string>& supers, vector<string>& subs, ofstream& doc);
+void alternating_intersection_max(vector<string>& supers, vector<string>& subs, ofstream& doc);
+void alternating_intersection_min(vector<string>& supers, vector<string>& subs, ofstream& doc);
 void runs_intersection(vector<string>& supers, vector<string>& subs, ofstream& doc);
 //void compare(vector<string>& supers, vector<string>& subs, ofstream& doc);
 void optimal_intersection(vector<string>& supers, vector<string>& subs, ofstream& doc);

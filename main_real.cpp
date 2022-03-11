@@ -36,7 +36,7 @@ int main(int argc, char *argv[]) {
     string num_of_tests_string;
     getline(input, num_of_tests_string);
     int num_of_tests = atoi(num_of_tests_string.c_str());
-    ofstream out("../compare.csv", ios::app);
+    ofstream out("../optimal3.csv", ios::app);
 
     for (int j = 0; j < num_of_tests; j++) {
         getline(input, sequences_string);
@@ -45,7 +45,6 @@ int main(int argc, char *argv[]) {
                                     istream_iterator<string>{}};
         supersequences = vector<string>(sequences.begin(), sequences.begin() + k);
         subsequences = vector<string>(sequences.begin() + k, sequences.end());
-
         compare_to_optimal(supersequences, subsequences, out);
     }
     out.close();
