@@ -1,3 +1,4 @@
+#include <complex>
 #include "helper.h"
 #include "CommonSequences.h"
 
@@ -186,12 +187,28 @@ vector<int> get_runs_vector(string str){
     return ret_vector;
 }
 
-pair<vector<int>,vector<int>> complete_vectors(vector<int> super_vector, vector<int> sub_vector, ){
-
+pair<vector<int>,vector<int>> complete_vectors(vector<int> big_vector, vector<int> small_vector,string big,string
+small){
+    if(big[0] != small[0]){
+        small_vector.insert(small_vector.begin(),0);
+    }
+    int diff = big_vector.size() - small_vector.size();
+    if(diff < 0){
+        big_vector.push_back(0);
+        return {big_vector,small_vector};
+    }
+    for(int i=0;i<diff;i++){
+        small_vector.push_back(0);
+    }
+    return {big_vector,small_vector};
 }
 
 int get_diff_norm(vector<int> super_vector, vector<int> sub_vector){
-
+    int count = 0;
+    for(int i=0;i<super_vector.size();i++){
+        count += (super_vector[i] - sub_vector[i])*(super_vector[i] - sub_vector[i]);
+    }
+    return count;
 }
 
 
@@ -200,22 +217,31 @@ vector<vector<string>::iterator> version_23(vector<string>& supersequences, vect
     int k = supersequences.size();
     vector<vector<int>> vec_super,vec_sub;
     for(int i=0;i<k;i++){
-        vec_super.push_back(get_runs_vector(supersequences[k]));
-        vec_sub.push_back(get_runs_vector(subsequences[k]));
+        vec_super.push_back(get_runs_vector(supersequences[i]));
+        vec_sub.push_back(get_runs_vector(subsequences[i]));
     }
+    bool first = true;
     pair<int,int> min_pair;
-    int min,current; // TODO: initialize
+    int min=0,current;
     pair<vector<int>,vector<int>> complete_sup_sub;
     for(int i_sup = 0;i_sup<supersequences.size();i_sup++){
         for(int j_sub = 0;j_sub<subsequences.size();j_sub++){
-            complete_sup_sub = complete_vectors(vec_super[i_sup],vec_sub[j_sub]);
+            if(vec_super[i_sup].size() > vec_sub[j_sub].size()){
+                complete_sup_sub = complete_vectors(vec_super[i_sup],vec_sub[j_sub],supersequences[i_sup],
+                                                    subsequences[j_sub]);
+            }
+            else{
+                complete_sup_sub = complete_vectors(vec_sub[j_sub],vec_super[i_sup],subsequences[j_sub],
+                                                    supersequences[i_sup]);
+            }
             current = get_diff_norm(complete_sup_sub.first,complete_sup_sub.second);
-            if(current < min){
+            if((current < min) || (first == true)){
                 min = current;
                 min_pair = {i_sup,j_sub};
+                first = false;
             }
         }
     }
-    return min_pair; // TODO: ben fix
+    return {supersequences.begin()+min_pair.first,subsequences.begin()+min_pair.second};
 }
 
