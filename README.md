@@ -58,7 +58,7 @@ choice of algorithm can take one of the following options:
 
 If you are running the test on a linux machine, copy the exe file and input file to the server and run the following command:
 ```Bash
-./[exe file] < algorithm_choice [path to input file]
+./[exe file] algorithm_choice [path to input file]
 ```
 
 If you are running the test through CLion the configuration should look like this:
@@ -99,7 +99,7 @@ The heuristics comapred in this test are as follows (more information on the heu
 
 If you are running the test on a linux machine, copy the exe file and input file to the server and run the following command:
 ```Bash
-./[exe file] < k [path to input file]
+./[exe file] k [path to input file]
 ```
 
 If you are running the test through CLion the configuration should look like this:
