@@ -100,14 +100,14 @@ int main(int argc, char *argv[]) {
                     }
                     else if(option == 21){ // algorithm 2, version 1
                         clock_t begin_time = clock();
-                        res = algorithm_2(&random_pair, supersequences, subsequences);
+                        res = algorithm_2(&heuristic_random_pair, supersequences, subsequences);
                         clock_t end_time = clock();
                         total_time += (double)(end_time-begin_time)/CLOCKS_PER_SEC;
                         test_times.push_back((double)(end_time-begin_time)/CLOCKS_PER_SEC);
                     }
                     else if(option == 22){ // algorithm 2, version 2
                         clock_t begin_time = clock();
-                        res = algorithm_2(&min_num_of_runs_diff_strings, supersequences, subsequences);
+                        res = algorithm_2(&heuristic_min_num_of_runs_diff_strings, supersequences, subsequences);
                         clock_t end_time = clock();
                         total_time += (double)(end_time-begin_time) / CLOCKS_PER_SEC;
                         test_times.push_back((double)(end_time-begin_time) / CLOCKS_PER_SEC);
