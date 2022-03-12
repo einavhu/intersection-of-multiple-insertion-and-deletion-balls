@@ -14,32 +14,32 @@
 
 using namespace std;
 
-// Return iterator to the string in vector strings with the maximal number of runs
-vector<string>::iterator max_runs(vector<string>& strings, int* n_p);
-
-// Return iterator to the string in vector strings with the minimal number of runs
-vector<string>::iterator min_runs(vector<string>& strings, int* n_p);
-
 // Return a pair (one from supersequences and one from subsequences) with the minimal absolute value of the
 // difference between the max length alternating sequence in each word.
-vector<vector<string>::iterator> min_max_alternating_diff_strings(vector<string>& supers, vector<string>& subs);
+vector<vector<string>::iterator> heuristic_min_max_alternating_diff_strings(vector<string>& supers, vector<string>& subs);
 
 // Return a pair (one from supersequences and one from subsequences) with the maximal absolute value of the
 // difference between the max length alternating sequence in each word.
-vector<vector<string>::iterator> max_max_alternating_diff_strings(vector<string>& supers,
-                                                                  vector<string>& subs);
+vector<vector<string>::iterator> heuristic_max_max_alternating_diff_strings(vector<string>& supers,
+                                                                            vector<string>& subs);
 // Return a pair of supersequence string and a subseqeunce string when the supersequence has the smallest number of
 // runs over all the supersequences and the subsequence has the largest number of runs over all the subsequences.
-vector<vector<string>::iterator> min_num_of_runs_diff_strings(vector<string>& supers, vector<string>& subs);
+vector<vector<string>::iterator> heuristic_min_num_of_runs_diff_strings(vector<string>& supers, vector<string>& subs);
 
 // Calculates for each sequence its run-vector (vector of length of runs in their order in the sequence). The
 // function then returns the pair whose run-vector distance is minimal. If the vectors are of different sizes the
 // run-vector of the subsequence is padded with zeros at its end and aligned with an additional zero at the
 // beginning if its first letter is different from that of the supersequence.
-vector<vector<string>::iterator> min_dist_run_vectors(vector<string>& supersequences, vector<string>& subsequences);
+vector<vector<string>::iterator> heuristic_min_dist_run_vectors(vector<string>& supersequences, vector<string>& subsequences);
 
 // Returns a random pair of strings when the first is from supers and the second is from subs.
-vector<vector<string>::iterator> random_pair(vector<string>& supers, vector<string>& subs);
+vector<vector<string>::iterator> heuristic_random_pair(vector<string>& supers, vector<string>& subs);
+
+// Return iterator to the string in vector strings with the maximal number of runs
+vector<string>::iterator max_runs(vector<string>& strings, int* n_p);
+
+// Return iterator to the string in vector strings with the minimal number of runs
+vector<string>::iterator min_runs(vector<string>& strings, int* n_p);
 
 // Return the number of runs in the string s.
 int num_runs(string s);

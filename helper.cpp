@@ -139,7 +139,7 @@ vector<tuple<vector<string>::iterator, int>> expand_vec(vector<string>& strings)
 }
 
 //find difference minimal for max alternating
-vector<vector<string>::iterator> min_max_alternating_diff_strings(vector<string>& supers, vector<string>& subs){
+vector<vector<string>::iterator> heuristic_min_max_alternating_diff_strings(vector<string>& supers, vector<string>& subs){
     vector<tuple<vector<string>::iterator, int>> A = expand_vec(supers);
     vector<tuple<vector<string>::iterator, int>> B = expand_vec(subs);
 
@@ -171,7 +171,7 @@ vector<vector<string>::iterator> min_max_alternating_diff_strings(vector<string>
     return {get<0>(*a_p), get<0>(*b_p)};
 }
 
-vector<vector<string>::iterator> max_max_alternating_diff_strings(vector<string>& supers, vector<string>& subs){
+vector<vector<string>::iterator> heuristic_max_max_alternating_diff_strings(vector<string>& supers, vector<string>& subs){
     vector<tuple<vector<string>::iterator, int>> A = expand_vec(supers);
     vector<tuple<vector<string>::iterator, int>> B = expand_vec(subs);
 
@@ -190,7 +190,7 @@ vector<vector<string>::iterator> max_max_alternating_diff_strings(vector<string>
 }
 
 
-vector<vector<string>::iterator> min_num_of_runs_diff_strings(vector<string>& supers, vector<string>& subs){
+vector<vector<string>::iterator> heuristic_min_num_of_runs_diff_strings(vector<string>& supers, vector<string>& subs){
     int min, max;
     int* max_p = &max;
     int* min_p = &min;
@@ -200,7 +200,7 @@ vector<vector<string>::iterator> min_num_of_runs_diff_strings(vector<string>& su
     return {it1, it2};
 }
 
-vector<vector<string>::iterator> random_pair(vector<string>& supers, vector<string>& subs){
+vector<vector<string>::iterator> heuristic_random_pair(vector<string>& supers, vector<string>& subs){
     srand((unsigned int)time(NULL));
     int idx1 = rand() % supers.size();
     int idx2 = rand() % subs.size();
@@ -253,7 +253,7 @@ int get_diff_norm(vector<int> super_vector, vector<int> sub_vector){
 
 
 
-vector<vector<string>::iterator> min_dist_run_vectors(vector<string>& supersequences, vector<string>& subsequences){
+vector<vector<string>::iterator> heuristic_min_dist_run_vectors(vector<string>& supersequences, vector<string>& subsequences){
     int k = supersequences.size();
     vector<vector<int>> vec_super,vec_sub;
     for(int i=0;i<k;i++){
