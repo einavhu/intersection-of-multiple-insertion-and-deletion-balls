@@ -10,8 +10,8 @@ Each word of length n+t is paired with a word of length n-t and the intersection
 
 ###### Algorithm 2:
 A pair of words, one of length n+t and one of length n-t, are chosen according to some heuristic.
-The intersection of their t-deletion and t-insertion balls respectively is calculated. The algorithm then proceeds with checking for every word in the intersection if it is a subsequence of all of the reamining long sequences and a supersequence of all remaining subsequences. only words that satisfy all of these conditions is outputed as part of the final reseult.
-Different heuristics can be found in the helper.h file (functions whose name begins with "heuristic_") and can be provided by the user as well. We reccomend using heuristic_min_num_of_runs_diff_strings which outperforms the rest.
+The intersection of their t-deletion and t-insertion balls respectively is calculated. The algorithm then proceeds with checking for every word in the intersection if it is a subsequence of all of the reamining long sequences and a supersequence of all remaining subsequences. only words that satisfy all of these conditions is outputed as part of the final result.
+Different heuristics can be found in the helper.h file (functions whose name begins with "heuristic_") and can be provided by the user as well. We recommend using heuristic_min_num_of_runs_diff_strings which outperforms the rest.
 It works as follows: the word of length n+t that is chosen is the one with the smallest number of runs. The word of length n-t that is chosen is the one with the largest number of runs. Ties are broken by the choosing the first word that satisfies the condition.
 
 ###### Base Algorithm
@@ -22,7 +22,7 @@ Both algorithms rely on the ability to calculate the intersection of a t-deletio
 ### How to use the project:
 In order to run either algorithms 1 or algorithm 2 (can be found in Algorithms.h file) you need to provide them with a vector of words of length n+t (supersequences) and vector of words of length n-t (subsequences).
 * For algorithm 1 you need to provide also the number of sets of pairs to create and use.
-* For algorithm 2 you need to provide also a pointer to a function which will act a the heuristic. This function will choose a pair of string, one from supersequences and one from subsequences. Examples can be found in the helper.cpp file (functions whose name begins with "heuristic_").
+* For algorithm 2 you need to provide also a pointer to a function which will act as the heuristic. This function will choose a pair of strings, one from supersequences and one from subsequences. Examples can be found in the helper.cpp file (functions whose name begins with "heuristic_").
 
 The result of both algorithms is a set<string> object which is the set of all words in the intersection of the relevant deletion and insertion balls.
 
@@ -88,8 +88,8 @@ A csv file. Each line contains the following fields:
 * t - number of insertions/deletions in the input words
 * result ID sizes of the different heuristics on the input
 
-The heuristics comapred in this test are as follows (more information on the heuristics can be found in the helper.h file)
-1. optimal intersection size (heuristic_optimal_interction) - although this can be passed as a heuristic function to algorithm 2, this is used as a performance base line to see how far from optimal the rest of the heurostics perform. Using this as an actual heuristic is redundant and takes far more time to compute than the others.
+The heuristics compared in this test are as follows (more information on the heuristics can be found in the helper.h file)
+1. optimal intersection size (heuristic_optimal_intersection) - although this can be passed as a heuristic function to algorithm 2, this is used as a performance base line to see how far from optimal the rest of the heuristics perform. Using this as an actual heuristic is redundant and takes far more time to compute than the others.
 2. max absolute value of different of values of the max-length alternating subsequences of the provided sequences (heuristic_max_max_alternating_diff_strings)
 3. min absolute value of different of values of the max-length alternating subsequences of the provided sequences (heuristic_max_max_alternating_diff_strings)
 4. random choice (heuristic_random_pair)
@@ -112,23 +112,23 @@ Existing test file in the project...
 
 ### Getting Started and Using the Code
 There are no special libraries needed to use any of the classes and files, Only standard cpp 11.
-All you need to do is downliad the project
+All you need to do is download the project
 
 ##### If you are using our tests:
-* If you are testing the algorithms' run-times update the add_exectuable line in the cmakelists as follows:
+* If you are testing the algorithms' run-times update the add_executable line in the cmakelists as follows:
 
 ```add_executable(intersection main_compare_algorithms_runtime.cpp CommonSequences.cpp Algorithms.cpp helper.cpp test_heuristics.cpp)```
 
-* If you are testing the heurstics update the add_exectuable line in the cmakelists as follows:
+* If you are testing the heuristics update the add_executable line in the cmakelists as follows:
 
 ```add_executable(intersection main_compare_heuristics.cpp CommonSequences.cpp Algorithms.cpp helper.cpp test_heuristics.cpp)```
 
 ##### If you already have a list of supersequences and subsequences and you wish to run one of our algorithms:
 1. For algorithm 1 call the function algorithm_1 in the Algorithms.h file.
-2. For algorthms 2 call the function algorithm_2 in the Algorithms.h file.
+2. For algorithms 2 call the function algorithm_2 in the Algorithms.h file.
     * If you want to use any of our heuristics they can be found in the helper.h file.
-    * If you wish to provide your own heurstic function:
-        * The function recieves two vectors of strings - supersequences and subsequences.
+    * If you wish to provide your own heuristic function:
+        * The function receives two vectors of strings - supersequences and subsequences.
         * The function returns a vector of two iterators - the first is an iterator to chosen string in supersequences and the second is an iterator to the chosen string in subsequences 
     ```CPP
     //Signature of the function
