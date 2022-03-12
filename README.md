@@ -15,7 +15,7 @@ Different heuristics can be found in the helper.h file (functions whose name beg
 It works as follows: the word of length n+t that is chosen is the one with the smallest number of runs. The word of length n-t that is chosen is the one with the largest number of runs. Ties are broken by the choosing the first word that satisfies the condition.
 
 ###### Base Algorithm
-Both algorithms rely on the ability to calculate the intersection of a t-deletion ball of a word of length n+t and a t-insertion ball of a word of length n-t. This is done using the class CommonSequences whose algorithm is based on those presented in the paper.....
+Both algorithms rely on the ability to calculate the intersection of a t-deletion ball of a word of length n+t and a t-insertion ball of a word of length n-t. This is done using the class CommonSequences whose algorithm is based on those presented in the paper ["The Intersection of Insertion and Deletion Balls"](https://ieeexplore.ieee.org/document/9611515)
 
 
 
@@ -61,11 +61,10 @@ If you are running the test on a linux machine, copy the exe file and input file
 ./[exe file] < algorithm_choice [path to input file]
 ```
 
-If you are running the test through CLion...
-[Add picture]
+If you are running the test through CLion the configuration should look like this:
+![](pictures/run_time_clion.PNG)
 
-A python file for generating tests is provided. Its name is ...
-
+In the python file input_file.py you can use the function create_run_time_tests to create a test input file 
 Small example test file in the project...
 
 
@@ -103,11 +102,10 @@ If you are running the test on a linux machine, copy the exe file and input file
 ./[exe file] < k [path to input file]
 ```
 
-If you are running the test through CLion...
-[Add picture]
+If you are running the test through CLion the configuration should look like this:
+![](pictures/heuristics_clion.PNG)
 
-A python file for generating tests is provided. Its name is ...
-
+In the python file input_file.py you can use the function create_run_time_tests to create a test input file 
 Existing test file in the project...
 
 
