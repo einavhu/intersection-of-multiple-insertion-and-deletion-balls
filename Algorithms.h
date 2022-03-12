@@ -15,7 +15,7 @@ using namespace std;
 // naive solution.
 // Input: k supersequences, k subsequences.
 // The algorithm pairs each supersequence to a subsequence and creates their common sequence intersection set. The
-// algorithm returns the intersection of the k common sets.
+// algorithm returns the intersection of the first k common sets.
 set<string> algorithm_1(int k, vector<string>& supersequence, vector<string>& subsequence);
 
 // better solution.
