@@ -26,8 +26,7 @@ void optimal_intersection(vector<string>& supers, vector<string>& subs, ofstream
     pair<pair<int,int>,int> best_pair = find_pair_with_min_intersection_size(supers, subs);
     CommonSequences cs = {supers[(best_pair.first).first], subs[(best_pair.first).second]};
     cs.create_ID();
-    cout << cs.supersequence << ", " <<  cs.subsequence << endl;
-    doc << ", " << cs.sequence_set.size() << endl;
+    doc << cs.sequence_set.size() << ", ";
 }
 
 void random_intersection(vector<string>& supers, vector<string>& subs, ofstream& doc){

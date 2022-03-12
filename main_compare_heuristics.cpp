@@ -31,9 +31,12 @@ int main(int argc, char *argv[]) {
     string num_of_tests_string;
     getline(input, num_of_tests_string);
     int num_of_tests = atoi(num_of_tests_string.c_str());
-    ofstream out("../compare.csv", ios::app);
+    ofstream out("../compare_n30_k20_t67.csv");
 
     for (int j = 0; j < num_of_tests; j++) {
+        if(j%50 == 0){
+            cout << j << endl;
+        }
         getline(input, sequences_string);
         istringstream iss(sequences_string);
         vector<string> sequences = {istream_iterator<string>{iss},
