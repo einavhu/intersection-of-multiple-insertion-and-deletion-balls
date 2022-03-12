@@ -2,6 +2,6 @@ cmake_minimum_required(VERSION 3.13)
 project(intersection)
 set (CMAKE_CXX_STANDARD 11)
 
-add_executable(intersection main_real.cpp CommonSequences.cpp Algorithms.cpp helper.cpp runs_vs_alternate.cpp)
+add_executable(intersection main_compare_algorithms_runtime.cpp CommonSequences.cpp Algorithms.cpp helper.cpp test_heuristics.cpp)
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=gnu++11")

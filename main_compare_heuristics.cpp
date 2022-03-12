@@ -1,37 +1,32 @@
 #include <iostream>
 #include "CommonSequences.h"
-#include "Algorithms.h"
-#include <fstream>
-#include <time.h>
-#include <sstream>
 #include <iterator>
-#include <chrono>
-#include "runs_vs_alternate.h"
-
-
-#define OPTION_1 1
-#define OPTION_2 2
+#include "test_heuristics.h"
 
 using namespace std;
 
-vector<string> split(string line){
-istringstream iss(line);
-return {istream_iterator<string>{iss},
-istream_iterator<string>{}};
+// This file read the input file and call the compare() function to get the ID result sizes of different heuristics
+// for algorithm 2.
 
-}
+// Input: k (number of supersequences/subsequences), test file path.
+// the first line in the test file is the number of tests
+// each subsequent line contains k supersequences and k subsequences in that order.
+// Output: csv file. Each line contains the following fields:
+// n - the target length of words in the intersection
+// t - number of insertions/deletions in the input words
+// result ID sizes of the different heuristics on the input
 
 int main(int argc, char *argv[]) {
 
     ifstream input;
-    input.open(argv[3]);
+    input.open(argv[2]);
     if (!input.is_open()) {
         cerr << "Failed opening input file!" << endl;
         return 0;
     }
 
     vector<string> supersequences, subsequences;
-    int k = atoi(argv[2]);
+    int k = atoi(argv[1]);
     string sequences_string;
     string num_of_tests_string;
     getline(input, num_of_tests_string);
@@ -46,7 +41,7 @@ int main(int argc, char *argv[]) {
         supersequences = vector<string>(sequences.begin(), sequences.begin() + k);
         subsequences = vector<string>(sequences.begin() + k, sequences.end());
 
-        compare_to_optimal(supersequences, subsequences, out);
+        compare(supersequences, subsequences, out);
     }
     out.close();
     return 0;
