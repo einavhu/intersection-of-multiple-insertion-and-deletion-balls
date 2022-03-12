@@ -6,11 +6,11 @@
 using namespace std;
 
 //internal function
-// TODO: what is it?
+// TODO: tiud
 void generate_strings_tweight(int t, vector<bool> curr, int i, int weight, vector<vector<bool>>& strings);
 
 //internal function
-// TODO: what is it?
+// TODO: tiud
 vector<bool> get_option(vector<bool> U, vector<bool> small);
 
 
