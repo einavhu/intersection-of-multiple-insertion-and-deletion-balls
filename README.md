@@ -77,8 +77,7 @@ If you are running the test on a linux machine, copy the exe file and input file
 If you are running the test through CLion the configuration should look like this:
 ![](pictures/run_time_clion.PNG)
 
-In the python file input_file.py you can use the function create_run_time_tests to create a test input file 
-Small example test file in the project...
+In the python file input_file_generator.py you can use the function create_run_time_tests to create a test input file 
 
 
 
@@ -118,8 +117,7 @@ If you are running the test on a linux machine, copy the exe file and input file
 If you are running the test through CLion the configuration should look like this:
 ![](pictures/heuristics_clion.PNG)
 
-In the python file input_file.py you can use the function create_run_time_tests to create a test input file 
-Existing test file in the project...
+In the python file input_file_generator.py you can use the function create_heuristic_tests to create a test input file 
 
 
 

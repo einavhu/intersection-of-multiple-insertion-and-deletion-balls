@@ -63,6 +63,12 @@ def create_heuristic_tests(num_tests_per_file, n_list, k_list, t_list, input_fil
 def create_run_time_tests(num_tests_per_params, n_list, k_list, t_list, input_file_name):
     f = open(input_file_name, "w")
     f.write(str(num_tests_per_params)+'\n')
+    f.write(" ".join([str(n) for n in n_list]))
+    f.write("\n")
+    f.write(" ".join([str(k) for k in k_list]))
+    f.write("\n")
+    f.write(" ".join([str(t) for t in t_list]))
+    f.write("\n")
     for n in n_list:
         for k in k_list:
             for t in t_list:
@@ -70,10 +76,10 @@ def create_run_time_tests(num_tests_per_params, n_list, k_list, t_list, input_fi
     f.close()
 
 def main():
-    n = [30]
-    ks = [20]
-    ts = [6,7]
-    create_heuristic_tests(100, n, ks, ts, "t6-7")
+    n = [5,10]
+    ks = [1,3]
+    ts = [1,3]
+    create_heuristic_tests(2, n, ks, ts, "testing_test")
 
 if __name__ == "__main__":
     main()
