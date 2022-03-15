@@ -21,9 +21,13 @@ Both algorithms rely on the ability to calculate the intersection of a t-deletio
 
 ### How to use the project:
 In order to run either algorithms 1 or algorithm 2 (can be found in Algorithms.h file) you need to provide them with a vector of words of length n+t (supersequences) and a vector of words of length n-t (subsequences).
-* For algorithm 1 you need to provide also the number of sets of pairs to create and use.
-* For algorithm 2 you need to provide also a pointer to a function which will act as the heuristic. This function will choose a pair of strings, one from supersequences and one from subsequences. Examples can be found in the helper.cpp file (functions whose name begins with "heuristic_").
-
+* For algorithm 1:
+    * You need to provide also the number of sets of pairs to create and use from the sequences (if there are k supersequences and k subsequences you can provide any number between 1 and k. For the intersection of all of the relevant deletion and insertion balls provide k as the parameter value).
+    * The implementation of algorithm 2 can be found in the Algorithms.cpp file and is named algorithm_1
+* For algorithm 2:
+    * You need to provide also a pointer to a function which will act as the heuristic. This function will choose a pair of strings, one from supersequences and one from subsequences. Examples can be found in the helper.cpp file (functions whose name begins with "heuristic_").
+    * The implementation of algorithm 2 can be found in the Algorithms.cpp file and is named algorithm_2
+    
 The result of both algorithms is a set<string> object which is the set of all words in the intersection of the relevant deletion and insertion balls.
 
 
@@ -32,6 +36,7 @@ The result of both algorithms is a set<string> object which is the set of all wo
 There are two separate main files depending on the tests you would like to run:
 To test the run-time of an algorithm use main_compare_algorithm_runtime.cpp.
 To test the intersection size found using different heuristics for algorithm 2, use main_compare_heuristics.
+Notice that the outputfiles will be found in the same folder as the exe file.
 
 
 #### run-time testing:
@@ -69,9 +74,13 @@ choice of algorithm can take one of the following options:
 * 22 - to test algorithm 2 with the heuristic function heuristic_min_num_of_runs_diff_strings
 
 
-If you are running the test on a linux machine, copy the exe file and input file to the server and run the following command:
+If you are running the test on a linux machine, copy the files to the server and run the following command to compile the code:
 ```Bash
-./[exe file] algorithm_choice [path to input file]
+g++ -std=gnu++11 main_compare_algorithms_runtime.cpp Algorithms.cpp CommonSequences.cpp helper.cpp -o intersection
+```
+Now, run the following command to run the test: 
+```Bash
+./intersection algorithm_choice [path to input file]
 ```
 
 If you are running the test through CLion the configuration should look like this:
@@ -101,7 +110,7 @@ A csv file. Each line contains the following fields:
 * the ID size of the (supersequence, subsequence) pair chosen by the heuristic (from the appropriate line in the input file)
 
 The heuristics compared in this test are as follows (more information on the heuristics can be found in the helper.h file)
-1. optimal intersection size (heuristic_optimal_intersection) - although this can be passed as a heuristic function to algorithm 2, this is used as a performance base line to see how far from optimal the rest of the heuristics perform. Using this as an actual heuristic will take far more time to compute than the others.
+1. optimal intersection size (find_pair_with_min_intersection_size) - although this can be passed as a heuristic function to algorithm 2, this is used as a performance base line to see how far from optimal the rest of the heuristics perform. Using this as an actual heuristic will take far more time to compute than the others.
 2. max absolute difference of values of the max-length alternating subsequences of the provided sequences (heuristic_max_max_alternating_diff_strings)
 3. min absolute difference of values of the max-length alternating subsequences of the provided sequences (heuristic_max_max_alternating_diff_strings)
 4. random choice (heuristic_random_pair)
@@ -109,9 +118,13 @@ The heuristics compared in this test are as follows (more information on the heu
 6. min difference of number of runs in a sequence (min_num_of_runs_diff_strings)
 
 
-If you are running the test on a linux machine, copy the exe file and input file to the server and run the following command:
+If you are running the test on a linux machine, copy the files to the server and run the following command to compile the code:
 ```Bash
-./[exe file] k [path to input file]
+g++ -std=gnu++11 main_compare_heuristics.cpp Algorithms.cpp CommonSequences.cpp helper.cpp test_heuristics.cpp -o intersection
+```
+Now, run the following command to run the test:
+```Bash
+./intersection k [path to input file]
 ```
 
 If you are running the test through CLion the configuration should look like this:
@@ -135,6 +148,7 @@ All you need to do is download the project
 ```add_executable(intersection main_compare_heuristics.cpp CommonSequences.cpp Algorithms.cpp helper.cpp test_heuristics.cpp)```
 
 ##### If you already have a list of supersequences and subsequences and you wish to run one of our algorithms:
+Firstly, save the lists in vectors of strings. Next, choose which algorithm you would like to use:
 1. For algorithm 1 call the function algorithm_1 in the Algorithms.h file.
 2. For algorithms 2 call the function algorithm_2 in the Algorithms.h file.
     * If you want to use any of our heuristics they can be found in the helper.h file.
@@ -145,4 +159,5 @@ All you need to do is download the project
     //Signature of the function
     vector<vector<string>::iterator> heuristic_function_name(vector<string>& supersequences ,vector<string>& subsequences)
     ```
-    
+Example Code:
+![](pictures/example.PNG)

@@ -31,7 +31,7 @@ int main(int argc, char *argv[]) {
     string num_of_tests_string;
     getline(input, num_of_tests_string);
     int num_of_tests = atoi(num_of_tests_string.c_str());
-    ofstream out("../compare_n30_k20_t67.csv");
+    ofstream out("./compare_heuristics.csv");
 
     for (int j = 0; j < num_of_tests; j++) {
         if(j%50 == 0){

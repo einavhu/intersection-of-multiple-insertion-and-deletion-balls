@@ -8,9 +8,9 @@
 
 #define HEURISTIC_1 1
 #define HEURISTIC_2 2
-#define OUTPUT_FILE_NAME1 "../algorithm1.csv"
-#define OUTPUT_FILE_NAME21 "../algorithm21.csv"
-#define OUTPUT_FILE_NAME22 "../algorithm22.csv"
+#define OUTPUT_FILE_NAME1 "./algorithm1.csv"
+#define OUTPUT_FILE_NAME21 "./algorithm21.csv"
+#define OUTPUT_FILE_NAME22 "./algorithm22.csv"
 
 using namespace std;
 
@@ -46,20 +46,22 @@ int main(int argc, char *argv[]) {
         cerr << "Failed opening input file!" << endl;
         return 0;
     }
-    ofstream alg;
+    string output_file_name;
     if (option == 1){
-        alg = ofstream(OUTPUT_FILE_NAME1);
+        output_file_name = OUTPUT_FILE_NAME1;
     }
     else if (option == 21){
-        alg = ofstream(OUTPUT_FILE_NAME21);
+        output_file_name = OUTPUT_FILE_NAME21;
     }
     else if (option == 22){
-        alg = ofstream(OUTPUT_FILE_NAME22);
+        output_file_name = OUTPUT_FILE_NAME22;
     }
     else {
         cerr << "Wrong algorithm!" << endl;
         return 0;
     }
+    ofstream alg(output_file_name.c_str());
+    alg << "n,k,t,avg_time" << endl;
 
     string test_num_s, ns, ks, ts;
     vector<int> nv, kv, tv;
@@ -77,7 +79,6 @@ int main(int argc, char *argv[]) {
 
     string sequences_string;
     for (int n : nv){
-        cout << n << endl;
         for (int k : kv){
             for (int t: tv){
                 vector<double> test_times;
