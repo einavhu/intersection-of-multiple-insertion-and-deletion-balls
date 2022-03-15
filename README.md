@@ -160,4 +160,4 @@ Firstly, save the lists in vectors of strings. Next, choose which algorithm you 
     vector<vector<string>::iterator> heuristic_function_name(vector<string>& supersequences ,vector<string>& subsequences)
     ```
 Example Code:
-![](pictures/example.PNG)
+![](pictures/example.png)
