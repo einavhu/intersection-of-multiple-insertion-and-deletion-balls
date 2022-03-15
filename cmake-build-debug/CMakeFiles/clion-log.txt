@@ -1,4 +1,0 @@
-"C:\Users\User\AppData\Local\JetBrains\CLion 2019.2.4\bin\cmake\win\bin\cmake.exe" -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - MinGW Makefiles" C:\technion\semester4\atam\hw4\intersection-of-multiple-insertion-and-deletion-balls
--- Configuring done
--- Generating done
--- Build files have been written to: C:/technion/semester4/atam/hw4/intersection-of-multiple-insertion-and-deletion-balls/cmake-build-debug

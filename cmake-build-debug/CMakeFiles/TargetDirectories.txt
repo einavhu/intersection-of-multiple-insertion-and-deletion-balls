@@ -1,3 +1,0 @@
-C:/technion/semester4/atam/hw4/intersection-of-multiple-insertion-and-deletion-balls/cmake-build-debug/CMakeFiles/edit_cache.dir
-C:/technion/semester4/atam/hw4/intersection-of-multiple-insertion-and-deletion-balls/cmake-build-debug/CMakeFiles/intersection.dir
-C:/technion/semester4/atam/hw4/intersection-of-multiple-insertion-and-deletion-balls/cmake-build-debug/CMakeFiles/rebuild_cache.dir
